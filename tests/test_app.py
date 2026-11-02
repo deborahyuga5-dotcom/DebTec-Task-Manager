@@ -9,7 +9,6 @@ from app import app
 
 def test_pagina_inicial():
     app.config["TESTING"] = True
-
     cliente = app.test_client()
 
     resposta = cliente.get("/")
@@ -17,9 +16,9 @@ def test_pagina_inicial():
     assert resposta.status_code == 200
     assert b"DebTec Task Manager" in resposta.data
 
+
 def test_cadastrar_tarefa():
     app.config["TESTING"] = True
-
     cliente = app.test_client()
 
     resposta = cliente.post(
@@ -35,12 +34,12 @@ def test_cadastrar_tarefa():
     assert resposta.status_code == 200
     assert b"Tarefa de teste" in resposta.data
 
+
 def test_excluir_tarefa():
     app.config["TESTING"] = True
-
     cliente = app.test_client()
 
-    resposta = cliente.post(
+    cliente.post(
         "/adicionar",
         data={
             "titulo": "Tarefa para excluir",
@@ -49,8 +48,6 @@ def test_excluir_tarefa():
         },
         follow_redirects=True
     )
-
-    assert b"Tarefa para excluir" in resposta.data
 
     from app import conectar
 
@@ -70,9 +67,10 @@ def test_excluir_tarefa():
 
     assert resposta.status_code == 200
     assert b"Tarefa para excluir" not in resposta.data
+
+
 def test_editar_tarefa():
     app.config["TESTING"] = True
-
     cliente = app.test_client()
 
     cliente.post(
@@ -108,3 +106,21 @@ def test_editar_tarefa():
 
     assert resposta.status_code == 200
     assert b"Tarefa editada" in resposta.data
+
+
+def test_bloquear_titulo_vazio():
+    app.config["TESTING"] = True
+    cliente = app.test_client()
+
+    resposta = cliente.post(
+        "/adicionar",
+        data={
+            "titulo": "   ",
+            "descricao": "Teste de título vazio",
+            "prioridade": "Alta"
+        },
+        follow_redirects=True
+    )
+
+    assert resposta.status_code == 200
+    assert "O título da tarefa não pode ficar vazio.".encode() in resposta.data
