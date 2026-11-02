@@ -40,3 +40,15 @@ A mudança será registrada no quadro Kanban, documentada neste arquivo e implem
 
 7. Como executar
 As instruções completas de instalação e execução serão adicionadas após a implementação do sistema.
+
+Mudança de escopo
+Durante o desenvolvimento, foi identificada a necessidade de ampliar a visualização das atividades. Por isso, foi adicionada uma funcionalidade de painel de indicadores.
+O painel apresenta:
+- Quantidade total de tarefas cadastradas;
+- Quantidade de tarefas pendentes;
+- Quantidade de tarefas em andamento;
+- Quantidade de tarefas concluídas.
+Essa melhoria facilita o acompanhamento das atividades e permite visualizar rapidamente o andamento do trabalho.
+
+Justificativa
+A mudança foi incorporada para tornar o sistema mais organizado e oferecer uma visão geral da produtividade, agregando valor ao projeto sem comprometer sua proposta inicial.
