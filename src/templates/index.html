@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DebTec Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>DebTec Task Manager</h1>
+        <p>Organização inteligente. Gestão eficiente.</p>
+    </header>
+
+    <main>
+        <h2>Minhas tarefas</h2>
+        <p>Bem-vindo ao seu painel de gerenciamento!</p>
+        
+<div class="dashboard">
+    <div class="card-indicador">
+        <h3>Total de tarefas</h3>
+        <p>{{ total }}</p>
+    </div>
+
+    <div class="card-indicador">
+        <h3>Pendentes</h3>
+        <p>{{ pendentes }}</p>
+    </div>
+
+    <div class="card-indicador">
+        <h3>Em andamento</h3>
+        <p>{{ andamento }}</p>
+    </div>
+
+    <div class="card-indicador">
+        <h3>Concluídas</h3>
+        <p>{{ concluidas }}</p>
+    </div>
+</div>
+
+
+        <section>
+            <h3>Nova tarefa</h3>
+
+            <form action="/adicionar" method="POST">
+
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao"></textarea>
+
+                <label for="prioridade">Prioridade:</label>
+                <select id="prioridade" name="prioridade" required>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+
+                <button type="submit">Cadastrar tarefa</button>
+
+            </form>
+        </section>
+
+        
+<section>
+    <h3>Minhas atividades</h3>
+
+    {% if tarefas %}
+        {% for tarefa in tarefas %}
+            <article>
+                <h4>{{ tarefa['titulo'] }}</h4>
+
+                <p>{{ tarefa['descricao'] }}</p>
+
+                <p>Prioridade: {{ tarefa['prioridade'] }}</p>
+
+                <p>Status: {{ tarefa['status'] }}</p>
+                
+<a href="{{ url_for('editar', id=tarefa['id']) }}">
+    <button type="button">Editar tarefa</button>
+</a>
+
+<form action="{{ url_for('excluir', id=tarefa['id']) }}" method="POST">
+    <button type="submit">Excluir tarefa</button>
+</form>
+
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>Nenhuma tarefa cadastrada ainda.</p>
+    {% endif %}
+</section>
+
+    </main>
+
+    <footer>
+        <p>Desenvolvido por DebTec Solutions</p>
+    </footer>
+
+</body>
+</html>
