@@ -17,35 +17,33 @@
     <main>
         <h2>Minhas tarefas</h2>
         <p>Bem-vindo ao seu painel de gerenciamento!</p>
-        
-<div class="dashboard">
-    <div class="card-indicador">
-        <h3>Total de tarefas</h3>
-        <p>{{ total }}</p>
-    </div>
 
-    <div class="card-indicador">
-        <h3>Pendentes</h3>
-        <p>{{ pendentes }}</p>
-    </div>
+        <div class="dashboard">
+            <div class="card-indicador">
+                <h3>Total de tarefas</h3>
+                <p>{{ total }}</p>
+            </div>
 
-    <div class="card-indicador">
-        <h3>Em andamento</h3>
-        <p>{{ andamento }}</p>
-    </div>
+            <div class="card-indicador">
+                <h3>Pendentes</h3>
+                <p>{{ pendentes }}</p>
+            </div>
 
-    <div class="card-indicador">
-        <h3>Concluídas</h3>
-        <p>{{ concluidas }}</p>
-    </div>
-</div>
+            <div class="card-indicador">
+                <h3>Em andamento</h3>
+                <p>{{ andamento }}</p>
+            </div>
 
+            <div class="card-indicador">
+                <h3>Concluídas</h3>
+                <p>{{ concluidas }}</p>
+            </div>
+        </div>
 
         <section>
             <h3>Nova tarefa</h3>
 
             <form action="/adicionar" method="POST">
-
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
 
@@ -60,45 +58,69 @@
                 </select>
 
                 <button type="submit">Cadastrar tarefa</button>
-
             </form>
         </section>
 
-        
-<section>
-    <h3>Minhas atividades</h3>
+        <section>
+            <h3>Minhas atividades</h3>
 
-    {% if tarefas %}
-        {% for tarefa in tarefas %}
-            <article>
-                <h4>{{ tarefa['titulo'] }}</h4>
+            <label for="filtro-status">Filtrar por status:</label>
 
-                <p>{{ tarefa['descricao'] }}</p>
+            <select id="filtro-status">
+                <option value="Todos">Todas as tarefas</option>
+                <option value="Pendente">Pendentes</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Concluída">Concluídas</option>
+            </select>
 
-                <p>Prioridade: {{ tarefa['prioridade'] }}</p>
+            {% if tarefas %}
+                {% for tarefa in tarefas %}
+                    <article class="tarefa" data-status="{{ tarefa['status'] }}">
+                        <h4>{{ tarefa['titulo'] }}</h4>
 
-                <p>Status: {{ tarefa['status'] }}</p>
-                
-<a href="{{ url_for('editar', id=tarefa['id']) }}">
-    <button type="button">Editar tarefa</button>
-</a>
+                        <p>{{ tarefa['descricao'] }}</p>
 
-<form action="{{ url_for('excluir', id=tarefa['id']) }}" method="POST">
-    <button type="submit">Excluir tarefa</button>
-</form>
+                        <p>Prioridade: {{ tarefa['prioridade'] }}</p>
 
-            </article>
-        {% endfor %}
-    {% else %}
-        <p>Nenhuma tarefa cadastrada ainda.</p>
-    {% endif %}
-</section>
+                        <p>Status: {{ tarefa['status'] }}</p>
 
+                        <a href="{{ url_for('editar', id=tarefa['id']) }}">
+                            <button type="button">Editar tarefa</button>
+                        </a>
+
+                        <form action="{{ url_for('excluir', id=tarefa['id']) }}" method="POST">
+                            <button type="submit">Excluir tarefa</button>
+                        </form>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p>Nenhuma tarefa cadastrada ainda.</p>
+            {% endif %}
+        </section>
     </main>
 
     <footer>
         <p>Desenvolvido por DebTec Solutions</p>
     </footer>
+
+    <script>
+        const filtroStatus = document.getElementById("filtro-status");
+        const tarefas = document.querySelectorAll(".tarefa");
+
+        filtroStatus.addEventListener("change", function () {
+            const statusSelecionado = filtroStatus.value;
+
+            tarefas.forEach(function (tarefa) {
+                const statusTarefa = tarefa.dataset.status;
+
+                if (statusSelecionado === "Todos" || statusTarefa === statusSelecionado) {
+                    tarefa.style.display = "block";
+                } else {
+                    tarefa.style.display = "none";
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

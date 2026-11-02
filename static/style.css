@@ -158,3 +158,8 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* Filtro de tarefas */
+#filtro-status {
+    max-width: 300px;
+    margin-bottom: 15px;
+}
