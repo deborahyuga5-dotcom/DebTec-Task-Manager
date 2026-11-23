@@ -1,7 +1,5 @@
 
-
-
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from database import criar_tabela, conectar
 
 app = Flask(
@@ -9,6 +7,9 @@ app = Flask(
     template_folder="templates",
     static_folder="../static"
 )
+
+# Chave necessária para utilizar mensagens flash
+app.config["SECRET_KEY"] = "debtec-task-manager-chave-local"
 
 criar_tabela()
 
@@ -51,9 +52,14 @@ def inicio():
 
 @app.route("/adicionar", methods=["POST"])
 def adicionar():
-    titulo = request.form["titulo"]
-    descricao = request.form["descricao"]
+    titulo = request.form["titulo"].strip()
+    descricao = request.form["descricao"].strip()
     prioridade = request.form["prioridade"]
+
+    # Verifica se o título foi preenchido corretamente
+    if not titulo:
+        flash("O título da tarefa não pode ficar vazio.", "erro")
+        return redirect("/")
 
     conexao = conectar()
 
@@ -67,6 +73,8 @@ def adicionar():
 
     conexao.commit()
     conexao.close()
+
+    flash("Tarefa cadastrada com sucesso!", "sucesso")
 
     return redirect("/")
 
@@ -83,6 +91,8 @@ def excluir(id):
     conexao.commit()
     conexao.close()
 
+    flash("Tarefa excluída com sucesso!", "sucesso")
+
     return redirect("/")
 
 
@@ -91,10 +101,15 @@ def editar(id):
     conexao = conectar()
 
     if request.method == "POST":
-        titulo = request.form["titulo"]
-        descricao = request.form["descricao"]
+        titulo = request.form["titulo"].strip()
+        descricao = request.form["descricao"].strip()
         prioridade = request.form["prioridade"]
         status = request.form["status"]
+
+        if not titulo:
+            conexao.close()
+            flash("O título da tarefa não pode ficar vazio.", "erro")
+            return redirect("/")
 
         conexao.execute(
             """
@@ -107,6 +122,8 @@ def editar(id):
 
         conexao.commit()
         conexao.close()
+
+        flash("Tarefa atualizada com sucesso!", "sucesso")
 
         return redirect("/")
 
@@ -125,4 +142,3 @@ def editar(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-

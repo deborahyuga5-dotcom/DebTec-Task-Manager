@@ -15,9 +15,11 @@
     </header>
 
     <main>
+
         <h2>Minhas tarefas</h2>
         <p>Bem-vindo ao seu painel de gerenciamento!</p>
 
+        <!-- Painel de indicadores -->
         <div class="dashboard">
             <div class="card-indicador">
                 <h3>Total de tarefas</h3>
@@ -40,12 +42,22 @@
             </div>
         </div>
 
+        <!-- Cadastro de tarefas -->
         <section>
             <h3>Nova tarefa</h3>
 
             <form action="/adicionar" method="POST">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
+
+                <!-- Mensagens de sucesso e erro -->
+                {% with mensagens = get_flashed_messages(with_categories=true) %}
+                    {% for categoria, mensagem in mensagens %}
+                        <div class="mensagem {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+                    {% endfor %}
+                {% endwith %}
 
                 <label for="descricao">Descrição:</label>
                 <textarea id="descricao" name="descricao"></textarea>
@@ -61,6 +73,7 @@
             </form>
         </section>
 
+        <!-- Lista de atividades -->
         <section>
             <h3>Minhas atividades</h3>
 
@@ -77,11 +90,8 @@
                 {% for tarefa in tarefas %}
                     <article class="tarefa" data-status="{{ tarefa['status'] }}">
                         <h4>{{ tarefa['titulo'] }}</h4>
-
                         <p>{{ tarefa['descricao'] }}</p>
-
                         <p>Prioridade: {{ tarefa['prioridade'] }}</p>
-
                         <p>Status: {{ tarefa['status'] }}</p>
 
                         <a href="{{ url_for('editar', id=tarefa['id']) }}">
@@ -97,12 +107,14 @@
                 <p>Nenhuma tarefa cadastrada ainda.</p>
             {% endif %}
         </section>
+
     </main>
 
     <footer>
         <p>Desenvolvido por DebTec Solutions</p>
     </footer>
 
+    <!-- Filtro por status -->
     <script>
         const filtroStatus = document.getElementById("filtro-status");
         const tarefas = document.querySelectorAll(".tarefa");
@@ -113,13 +125,32 @@
             tarefas.forEach(function (tarefa) {
                 const statusTarefa = tarefa.dataset.status;
 
-                if (statusSelecionado === "Todos" || statusTarefa === statusSelecionado) {
+                if (
+                    statusSelecionado === "Todos" ||
+                    statusTarefa === statusSelecionado
+                ) {
                     tarefa.style.display = "block";
                 } else {
                     tarefa.style.display = "none";
                 }
             });
         });
+    </script>
+
+    <!-- Faz as mensagens desaparecerem após 3 segundos -->
+    <script>
+        setTimeout(function () {
+            const mensagens = document.querySelectorAll(".mensagem");
+
+            mensagens.forEach(function (mensagem) {
+                mensagem.style.transition = "opacity 0.5s";
+                mensagem.style.opacity = "0";
+
+                setTimeout(function () {
+                    mensagem.remove();
+                }, 500);
+            });
+        }, 3000);
     </script>
 
 </body>
