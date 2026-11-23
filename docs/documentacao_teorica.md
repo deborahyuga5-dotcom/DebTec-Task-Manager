@@ -44,9 +44,7 @@ Com esses diagramas, foi possível representar melhor a estrutura e o funcioname
 
 ## 6. Mudança de escopo
 
-Durante o desenvolvimento, percebi que seria interessante acrescentar algumas funcionalidades para deixar o sistema mais completo. Uma das mudanças foi a criação de um painel de indicadores, que mostra a quantidade total de tarefas, as pendentes, as que estão em andamento e as concluídas. Também foi desenvolvido um filtro por status, permitindo encontrar as tarefas com mais facilidade.
-
-Essas melhorias não estavam detalhadas na proposta inicial, mas foram acrescentadas porque ajudam bastante na organização e na visualização das atividades.
+Durante o desenvolvimento, percebi que seria interessante acrescentar algumas funcionalidades para deixar o sistema mais completo. Uma das mudanças foi a criação de um painel de indicadores, que mostra a quantidade total de tarefas, as pendentes, as que estão em andamento e as concluídas. Também foi desenvolvido um filtro por status, permitindo encontrar as tarefas com mais facilidade. Essas melhorias não estavam detalhadas na proposta inicial, mas foram acrescentadas porque ajudam bastante na organização e na visualização das atividades.
 
 ## 7. Testes automatizados
 
