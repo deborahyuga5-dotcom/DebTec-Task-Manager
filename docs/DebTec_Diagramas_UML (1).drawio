@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT" pages="2">
+  <diagram id="usecases" name="Casos de Uso">
+    <mxGraphModel dx="1776" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="actor" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#6A1B4D;fontColor=#4A1730;fontSize=14;" value="Usuário" vertex="1">
+          <mxGeometry height="110" width="70" x="65" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="uc1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" value="Visualizar tarefas" vertex="1">
+          <mxGeometry height="70" width="210" x="250" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_uc1" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;strokeColor=#8E5570;" target="uc1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" value="Cadastrar tarefa" vertex="1">
+          <mxGeometry height="70" width="210" x="585" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_uc2" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;strokeColor=#8E5570;" target="uc2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" value="Editar tarefa" vertex="1">
+          <mxGeometry height="70" width="210" x="560" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_uc3" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;strokeColor=#8E5570;" target="uc3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" value="Excluir tarefa" vertex="1">
+          <mxGeometry height="70" width="210" x="585" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_uc4" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;strokeColor=#8E5570;" target="uc4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" value="Filtrar tarefas por status" vertex="1">
+          <mxGeometry height="70" width="210" x="270" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_uc5" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;strokeColor=#8E5570;" target="uc5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" value="Consultar indicadores" vertex="1">
+          <mxGeometry height="70" width="210" x="600" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_uc6" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;strokeColor=#8E5570;" target="uc6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="classes" name="Diagrama de Classes">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="task" value="Tarefa" style="swimlane;html=1;startSize=30;rounded=0;fillColor=#FCE4EC;swimlaneFillColor=#FFFFFF;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="385" y="95" width="360" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="attrs" value="- id: int&#xa;- titulo: string&#xa;- descricao: string&#xa;- prioridade: string&#xa;- status: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;whiteSpace=wrap;fontSize=14;fontColor=#4A1730;" parent="1" vertex="1">
+          <mxGeometry x="386" y="125" width="358" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ops" value="+ cadastrar()&#xa;+ editar()&#xa;+ excluir()&#xa;+ listar()&#xa;+ filtrarPorStatus()" style="text;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;whiteSpace=wrap;fontSize=14;fontColor=#4A1730;" parent="1" vertex="1">
+          <mxGeometry x="386" y="305" width="358" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="BancoDeDados" style="swimlane;html=1;startSize=30;rounded=0;fillColor=#FCE4EC;swimlaneFillColor=#FFFFFF;strokeColor=#C2185B;fontColor=#4A1730;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="385" y="505" width="360" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="dbattrs" value="- conexao: SQLite&#xa;- tabela: tarefas" style="text;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;whiteSpace=wrap;fontSize=14;fontColor=#4A1730;" parent="1" vertex="1">
+          <mxGeometry x="386" y="535" width="358" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dbops" value="+ conectar()&#xa;+ criarTabela()&#xa;+ salvarAlteracoes()" style="text;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;whiteSpace=wrap;fontSize=14;fontColor=#4A1730;" parent="1" vertex="1">
+          <mxGeometry x="386" y="605" width="358" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="rel" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#C2185B;labelBackgroundColor=#FFFFFF;" parent="1" edge="1" source="task" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
